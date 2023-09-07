@@ -25,8 +25,8 @@ app.get('/api', (req,res) =>{
         current_day: currentDayStr,
         utc_time,
         track,
-        github_file_url: 'linktofile',
-        github_repo_url: 'linktorepo',
+        github_file_url: 'https://github.com/Ayodejidara/Hng_backend_task1/blob/main/index.js',
+        github_repo_url: 'https://github.com/Ayodejidara/Hng_backend_task1',
         status_code: 200
     });
 });
