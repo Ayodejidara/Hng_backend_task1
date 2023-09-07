@@ -2,19 +2,19 @@ const express = require('express');
 
 const app = express();
 
-const daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+function getCurrentday() {
+    const daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const date = new Date();
-    const currentDayStr = daysOfWeek[date.getDay()];
-
+    return daysOfWeek[date.getDay()];
+}
 
 function getCurrentUTC() {
     const currentDate = new Date();
-    const currentUTCTime = currentDate.toISOString();
-
-    return currentUTCTime;
+    return currentDate.toISOString().slice(0,19) + 'Z';
 };
 
 const utc_time = getCurrentUTC();
+const current_day = getCurrentday();
 
 app.get('/api', (req,res) =>{
     const slack_name = req.query.slack_name;
@@ -22,7 +22,7 @@ app.get('/api', (req,res) =>{
 
     res.status(200).json({
         slack_name,
-        current_day: currentDayStr,
+        current_day,
         utc_time,
         track,
         github_file_url: 'https://github.com/Ayodejidara/Hng_backend_task1/blob/main/index.js',
