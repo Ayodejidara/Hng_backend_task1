@@ -2,23 +2,17 @@ const express = require('express');
 
 const app = express();
 
-function getCurrentday() {
-    const daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const date = new Date();
-    return daysOfWeek[date.getDay()];
-}
-
-function getCurrentUTC() {
-    const currentDate = new Date();
-    return currentDate.toISOString().slice(0,19) + 'Z';
-};
-
-const utc_time = getCurrentUTC();
-const current_day = getCurrentday();
 
 app.get('/api', (req,res) =>{
     const slack_name = req.query.slack_name;
     const track = req.query.track;
+
+    const daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const date = new Date();
+    const current_day= daysOfWeek[date.getDay()];
+
+    const currentDate = new Date();
+    const utc_time = currentDate.toISOString().slice(0,19) + 'Z';
 
     res.status(200).json({
         slack_name,
